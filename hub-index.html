@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0d1a6e">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="كيدة">
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'><rect fill='%230d1a6e' width='192' height='192'/><circle cx='96' cy='96' r='60' fill='%23ffd700'/></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+    <title>كيدة - مجموعة التطبيقات</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100%;
+            font-family: 'Tajawal', sans-serif;
+            background: linear-gradient(135deg, #0d1a6e 0%, #020b2e 100%);
+            color: #fff;
+        }
+
+        .app-container {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(180deg, rgba(13, 26, 110, 0.95) 0%, rgba(2, 11, 46, 0.9) 100%);
+            padding: 1.5rem 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 3px solid #ffd700;
+            backdrop-filter: blur(10px);
+            position: relative;
+            z-index: 100;
+        }
+
+        .header-title {
+            font-family: 'Amiri', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #ffd700;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .home-btn {
+            background: linear-gradient(135deg, #ffd700 0%, #ffcc00 100%);
+            border: none;
+            padding: 0.6rem 1.2rem;
+            border-radius: 25px;
+            color: #0d1a6e;
+            font-weight: 700;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
+            display: none;
+        }
+
+        .home-btn:active {
+            transform: scale(0.95);
+        }
+
+        .home-btn.show {
+            display: block;
+        }
+
+        .content {
+            display: flex;
+            flex: 1;
+            overflow: hidden;
+        }
+
+        .menu {
+            width: 100%;
+            overflow-y: auto;
+            padding: 1rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+            gap: 1rem;
+            animation: fadeUp 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .menu.hidden {
+            display: none;
+        }
+
+        .app-card {
+            background: rgba(255, 215, 0, 0.1);
+            border: 2px solid #ffd700;
+            border-radius: 15px;
+            padding: 1.2rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .app-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.2) 0%, transparent 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .app-card:hover {
+            background: rgba(255, 215, 0, 0.15);
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 8px 25px rgba(255, 215, 0, 0.3);
+            border-color: #ffe566;
+        }
+
+        .app-card:hover::before {
+            opacity: 1;
+        }
+
+        .app-icon {
+            font-size: 2.5rem;
+            margin-bottom: 0.8rem;
+            display: block;
+        }
+
+        .app-name {
+            font-family: 'Tajawal', sans-serif;
+            font-weight: 700;
+            font-size: 0.95rem;
+            color: #ffe566;
+            word-break: break-word;
+            position: relative;
+            z-index: 1;
+        }
+
+        .app-frame {
+            width: 100%;
+            height: 100%;
+            border: none;
+            display: none;
+        }
+
+        .app-frame.active {
+            display: block;
+            animation: fadeUp 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .ornament {
+            position: fixed;
+            font-size: 4rem;
+            opacity: 0.15;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .ornament-tl {
+            top: 10px;
+            right: 10px;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .ornament-br {
+            bottom: 10px;
+            left: 10px;
+            animation: float 6s ease-in-out infinite reverse;
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .header {
+                padding: 1rem 0.8rem;
+            }
+
+            .header-title {
+                font-size: 1.4rem;
+            }
+
+            .home-btn {
+                padding: 0.5rem 1rem;
+                font-size: 0.85rem;
+            }
+
+            .menu {
+                grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+                gap: 0.8rem;
+                padding: 0.8rem;
+            }
+
+            .app-card {
+                padding: 1rem;
+            }
+
+            .app-icon {
+                font-size: 2rem;
+                margin-bottom: 0.6rem;
+            }
+
+            .app-name {
+                font-size: 0.85rem;
+            }
+        }
+
+        /* Scrollbar styling */
+        .menu::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .menu::-webkit-scrollbar-track {
+            background: rgba(255, 215, 0, 0.1);
+            border-radius: 10px;
+        }
+
+        .menu::-webkit-scrollbar-thumb {
+            background: rgba(255, 215, 0, 0.4);
+            border-radius: 10px;
+        }
+
+        .menu::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 215, 0, 0.6);
+        }
+    </style>
+</head>
+<body>
+    <div class="ornament ornament-tl">✦</div>
+    <div class="ornament ornament-br">✦</div>
+
+    <div class="app-container">
+        <div class="header">
+            <div class="header-title">كيدة</div>
+            <button class="home-btn" id="homeBtn">العودة للقائمة</button>
+        </div>
+
+        <div class="content">
+            <div class="menu" id="menu"></div>
+            <iframe id="appFrame" class="app-frame"></iframe>
+        </div>
+    </div>
+
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('sw.js').catch(err => console.log('SW error:', err));
+        }
+
+        const apps = [
+            { name: 'الباطري', url: 'https://albaytari.kieda.online', icon: '🐾' },
+            { name: 'السيارة', url: 'https://sayaratii.kieda.online', icon: '🚗' },
+            { name: 'المصرفي', url: 'https://masrifi.kieda.online', icon: '🏦' },
+            { name: 'الإذاعة', url: 'https://idhaati.kieda.online', icon: '📻' },
+            { name: 'المترجم', url: 'https://moutarjem.kieda.online', icon: '🗣️' },
+            { name: 'التغذية', url: 'https://maydati.kieda.online', icon: '🍎' },
+            { name: 'الترجمة', url: 'https://traducteur.kieda.online', icon: '🌐' },
+            { name: 'النظارة', url: 'https://nadharatioptic.kieda.online', icon: '👓' },
+            { name: 'النوارتي', url: 'https://nawarati.kieda.online', icon: '💪' },
+            { name: 'إسطنبول', url: 'https://istanbulharissaedition.kieda.online', icon: '🕌' },
+            { name: 'الذكاء الاصطناعي', url: 'https://IA.kieda.online', icon: '🤖' },
+            { name: 'IAE', url: 'https://IAE.kieda.online', icon: '⚙️' },
+            { name: 'طبيب الأسنان', url: 'https://dentiste.kieda.online', icon: '🦷' },
+            { name: 'الجمياتي', url: 'https://JAMIIATI.kieda.online', icon: '👥' },
+            { name: 'الضروري', url: 'https://essential.kieda.online', icon: '⚡' },
+            { name: 'الجزار', url: 'https://jazzar.kieda.online', icon: '🥩' },
+            { name: 'طبيب الألم', url: 'https://tabibialam.kieda.online', icon: '🏥' },
+            { name: 'الطوارئ', url: 'https://urgence-test.kieda.online', icon: '🚑' },
+            { name: 'الدابي', url: 'https://dabi.kieda.online', icon: '🏧' },
+            { name: 'الصيدلية', url: 'https://saydaliati.kieda.online', icon: '💊' },
+            { name: 'المحطات', url: 'https://mahattati.kieda.online', icon: '⛽' },
+            { name: 'الصلاة', url: 'https://salati.kieda.online', icon: '🕌' }
+        ];
+
+        const menu = document.getElementById('menu');
+        const appFrame = document.getElementById('appFrame');
+        const homeBtn = document.getElementById('homeBtn');
+
+        apps.forEach(app => {
+            const card = document.createElement('div');
+            card.className = 'app-card';
+            card.innerHTML = `
+                <span class="app-icon">${app.icon}</span>
+                <div class="app-name">${app.name}</div>
+            `;
+            card.addEventListener('click', () => {
+                appFrame.src = app.url;
+                appFrame.classList.add('active');
+                menu.classList.add('hidden');
+                homeBtn.classList.add('show');
+            });
+            menu.appendChild(card);
+        });
+
+        homeBtn.addEventListener('click', () => {
+            appFrame.src = '';
+            appFrame.classList.remove('active');
+            menu.classList.remove('hidden');
+            homeBtn.classList.remove('show');
+        });
+    </script>
+</body>
+</html>

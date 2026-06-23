@@ -1,0 +1,59 @@
+{
+  "name": "كيدة - مجموعة التطبيقات",
+  "short_name": "كيدة",
+  "description": "مجموعة تطبيقات كيدة الذكية للخدمات المتكاملة",
+  "start_url": "/hub/",
+  "scope": "/hub/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "theme_color": "#0d1a6e",
+  "background_color": "#020b2e",
+  "dir": "rtl",
+  "lang": "ar",
+  "categories": ["productivity", "utilities"],
+  "icons": [
+    {
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'><defs><linearGradient id='g1' x1='0%' y1='0%' x2='100%' y2='100%'><stop offset='0%' style='stop-color:%230d1a6e;stop-opacity:1' /><stop offset='100%' style='stop-color:%23020b2e;stop-opacity:1' /></linearGradient></defs><rect fill='url(%23g1)' width='192' height='192'/><circle cx='96' cy='96' r='60' fill='%23ffd700'/><text x='96' y='105' font-family='Arial' font-size='50' font-weight='bold' fill='%230d1a6e' text-anchor='middle' dominant-baseline='middle'>ك</text></svg>",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><defs><linearGradient id='g2' x1='0%' y1='0%' x2='100%' y2='100%'><stop offset='0%' style='stop-color:%230d1a6e;stop-opacity:1' /><stop offset='100%' style='stop-color:%23020b2e;stop-opacity:1' /></linearGradient></defs><rect fill='url(%23g2)' width='512' height='512'/><circle cx='256' cy='256' r='180' fill='%23ffd700'/><text x='256' y='275' font-family='Arial' font-size='140' font-weight='bold' fill='%230d1a6e' text-anchor='middle' dominant-baseline='middle'>ك</text></svg>",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'><defs><linearGradient id='g3' x1='0%' y1='0%' x2='100%' y2='100%'><stop offset='0%' style='stop-color:%230d1a6e;stop-opacity:1' /><stop offset='100%' style='stop-color:%23020b2e;stop-opacity:1' /></linearGradient></defs><rect fill='url(%23g3)' width='192' height='192'/><circle cx='96' cy='96' r='60' fill='%23ffd700'/><text x='96' y='105' font-family='Arial' font-size='50' font-weight='bold' fill='%230d1a6e' text-anchor='middle' dominant-baseline='middle'>ك</text></svg>",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 540 720'><defs><linearGradient id='s1' x1='0%' y1='0%' x2='100%' y2='100%'><stop offset='0%' style='stop-color:%230d1a6e;stop-opacity:1' /><stop offset='100%' style='stop-color:%23020b2e;stop-opacity:1' /></linearGradient></defs><rect fill='url(%23s1)' width='540' height='720'/><rect y='0' width='540' height='80' fill='rgba(13,26,110,0.95)' stroke='%23ffd700' stroke-width='3'/><text x='270' y='45' font-family='Arial' font-size='32' font-weight='bold' fill='%23ffd700' text-anchor='middle' dominant-baseline='middle'>كيدة</text></svg>",
+      "sizes": "540x720",
+      "type": "image/svg+xml",
+      "form_factor": "narrow"
+    }
+  ],
+  "prefer_related_applications": false,
+  "shortcuts": [
+    {
+      "name": "الصلاة",
+      "short_name": "صلاة",
+      "description": "مواقيت الصلاة",
+      "url": "/hub/?app=salati",
+      "icons": [{ "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 96 96'><rect fill='%230d1a6e' width='96' height='96'/><text x='48' y='50' font-size='48' text-anchor='middle' dominant-baseline='middle'>🕌</text></svg>", "sizes": "96x96" }]
+    },
+    {
+      "name": "الصيدلية",
+      "short_name": "صيدلية",
+      "description": "تحديد الصيدليات",
+      "url": "/hub/?app=saydaliati",
+      "icons": [{ "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 96 96'><rect fill='%230d1a6e' width='96' height='96'/><text x='48' y='50' font-size='48' text-anchor='middle' dominant-baseline='middle'>💊</text></svg>", "sizes": "96x96" }]
+    }
+  ]
+}

@@ -6,13 +6,13 @@
     <meta name="theme-color" content="#0d1a6e">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="كيدة">
+    <meta name="apple-mobile-web-app-title" content="قيادة">
     <link rel="manifest" href="manifest.json">
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'><rect fill='%230d1a6e' width='192' height='192'/><circle cx='96' cy='96' r='60' fill='%23ffd700'/></svg>">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'><rect fill='%230d1a6e' width='192' height='192'/><circle cx='96' cy='96' r='60' fill='%23F4AF4D'/></svg>">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
-    <title>كيدة - مجموعة التطبيقات</title>
+    <title>قيادة</title>
     <style>
         * {
             margin: 0;
@@ -23,8 +23,23 @@
         html, body {
             height: 100%;
             font-family: 'Tajawal', sans-serif;
-            background: linear-gradient(135deg, #0d1a6e 0%, #020b2e 100%);
+            background: linear-gradient(180deg, #0d1a6e 0%, #020b2e 50%, #0d1a6e 100%);
             color: #fff;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(244, 175, 77, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(244, 175, 77, 0.06) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 1;
         }
 
         .app-container {
@@ -32,64 +47,233 @@
             flex-direction: column;
             height: 100vh;
             overflow: hidden;
+            position: relative;
+            z-index: 2;
+        }
+
+        .shimmer-top {
+            position: absolute;
+            top: 0;
+            width: 100%;
+            height: 12px;
+            background: linear-gradient(90deg, 
+                transparent 0%, 
+                #F4AF4D 20%, 
+                #FFD700 40%,
+                #F4AF4D 60%,
+                #FFAA00 80%,
+                transparent 100%);
+            box-shadow: 0 0 30px rgba(244, 175, 77, 0.8), 
+                        inset 0 0 15px rgba(255, 215, 0, 0.4);
+            z-index: 20;
+        }
+
+        .shimmer-bottom {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 12px;
+            background: linear-gradient(90deg, 
+                transparent 0%, 
+                #F4AF4D 20%, 
+                #FFD700 40%,
+                #F4AF4D 60%,
+                #FFAA00 80%,
+                transparent 100%);
+            box-shadow: 0 0 30px rgba(244, 175, 77, 0.8),
+                        inset 0 0 15px rgba(255, 215, 0, 0.4);
+            z-index: 20;
+        }
+
+        .ornament-corner {
+            position: fixed;
+            font-size: 6rem;
+            opacity: 0.12;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .ornament-tl {
+            top: 30px;
+            right: 15px;
+            animation: rotate 30s linear infinite;
+        }
+
+        .ornament-br {
+            bottom: 30px;
+            left: 15px;
+            animation: rotate 30s linear infinite reverse;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
         }
 
         .header {
-            background: linear-gradient(180deg, rgba(13, 26, 110, 0.95) 0%, rgba(2, 11, 46, 0.9) 100%);
-            padding: 1.5rem 1rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 3px solid #ffd700;
-            backdrop-filter: blur(10px);
+            padding: 2.5rem 1rem 1.5rem;
+            text-align: center;
             position: relative;
-            z-index: 100;
+            z-index: 20;
+        }
+
+        .header-decoration {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            animation: fadeUp 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .decoration-line {
+            width: 60px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent 0%, #F4AF4D 50%, transparent 100%);
+            box-shadow: 0 0 10px rgba(244, 175, 77, 0.6);
+        }
+
+        .decoration-dot {
+            width: 8px;
+            height: 8px;
+            background: #F4AF4D;
+            border-radius: 50%;
+            box-shadow: 0 0 8px rgba(244, 175, 77, 0.8);
+        }
+
+        .bismillah {
+            font-family: 'Amiri', serif;
+            font-size: 1.4rem;
+            background: linear-gradient(135deg, #F4AF4D 0%, #FFD700 50%, #F4AF4D 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            animation: fadeUp 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) 0.1s backwards;
+            text-shadow: 0 2px 8px rgba(244, 175, 77, 0.3);
         }
 
         .header-title {
             font-family: 'Amiri', serif;
-            font-size: 1.8rem;
+            font-size: 3.5rem;
             font-weight: 700;
-            color: #ffd700;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            background: linear-gradient(135deg, #F4AF4D 0%, #FFAA00 25%, #FFD700 50%, #FFAA00 75%, #F4AF4D 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.8rem;
+            letter-spacing: 3px;
+            animation: fadeUp 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) 0.2s backwards;
+            filter: drop-shadow(0 4px 12px rgba(244, 175, 77, 0.4));
         }
 
-        .home-btn {
-            background: linear-gradient(135deg, #ffd700 0%, #ffcc00 100%);
-            border: none;
-            padding: 0.6rem 1.2rem;
-            border-radius: 25px;
-            color: #0d1a6e;
+        .subtitle {
+            font-family: 'Tajawal', sans-serif;
+            font-size: 1.1rem;
+            color: rgba(244, 175, 77, 0.9);
+            font-weight: 500;
+            letter-spacing: 1px;
+            animation: fadeUp 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) 0.3s backwards;
+        }
+
+        .quran-verse {
+            margin-top: 1.5rem;
+            margin-bottom: 1.5rem;
+            padding: 2rem 1.5rem;
+            border: 2px solid #F4AF4D;
+            background: linear-gradient(135deg, rgba(244, 175, 77, 0.15) 0%, rgba(255, 215, 0, 0.08) 100%);
+            border-radius: 20px;
+            animation: fadeUp 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) 0.2s backwards;
+            box-shadow: 0 0 30px rgba(244, 175, 77, 0.6),
+                        inset 0 0 20px rgba(244, 175, 77, 0.2),
+                        0 0 60px rgba(255, 215, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .quran-verse::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, 
+                transparent 0%, 
+                rgba(244, 175, 77, 0.1) 25%,
+                rgba(255, 215, 0, 0.15) 50%,
+                rgba(244, 175, 77, 0.1) 75%,
+                transparent 100%);
+            animation: shine 3s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        @keyframes shine {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.8; }
+        }
+
+        .quran-verse::after {
+            content: '✦ ✦ ✦';
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 1rem;
+            color: #F4AF4D;
+            letter-spacing: 8px;
+            opacity: 0.6;
+            text-shadow: 0 0 10px rgba(244, 175, 77, 0.8);
+        }
+
+        .verse-arabic {
+            font-family: 'Amiri', serif;
+            font-size: 1.3rem;
+            color: #F4AF4D;
             font-weight: 700;
+            line-height: 2;
+            margin-bottom: 0.8rem;
+            letter-spacing: 1px;
+            text-shadow: 0 2px 6px rgba(244, 175, 77, 0.2);
+        }
+
+        .verse-translation {
+            font-family: 'Tajawal', sans-serif;
             font-size: 0.95rem;
-            cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
-            display: none;
+            color: rgba(244, 175, 77, 0.85);
+            font-style: italic;
+            line-height: 1.6;
         }
 
-        .home-btn:active {
-            transform: scale(0.95);
-        }
-
-        .home-btn.show {
-            display: block;
+        .verse-reference {
+            font-family: 'Tajawal', sans-serif;
+            font-size: 0.85rem;
+            color: rgba(244, 175, 77, 0.7);
+            margin-top: 0.8rem;
+            text-align: center;
+            font-weight: 600;
         }
 
         .content {
             display: flex;
             flex: 1;
             overflow: hidden;
+            padding: 1.5rem;
+            max-width: 100%;
         }
 
         .menu {
             width: 100%;
+            max-width: 700px;
+            margin: 0 auto;
             overflow-y: auto;
-            padding: 1rem;
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
-            gap: 1rem;
-            animation: fadeUp 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 1.2rem;
+            animation: fadeUp 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) 0.4s backwards;
+            padding-right: 0.5rem;
         }
 
         .menu.hidden {
@@ -97,16 +281,18 @@
         }
 
         .app-card {
-            background: rgba(255, 215, 0, 0.1);
-            border: 2px solid #ffd700;
-            border-radius: 15px;
-            padding: 1.2rem;
+            background: linear-gradient(135deg, rgba(13, 26, 110, 0.6) 0%, rgba(2, 11, 46, 0.7) 100%);
+            border: 2px solid #F4AF4D;
+            border-radius: 25px;
+            padding: 1.8rem 1.2rem;
             text-align: center;
             cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-            backdrop-filter: blur(10px);
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            backdrop-filter: blur(20px);
             position: relative;
             overflow: hidden;
+            box-shadow: 0 8px 24px rgba(244, 175, 77, 0.15),
+                        inset 0 1px 0 rgba(255, 255, 255, 0.1);
         }
 
         .app-card::before {
@@ -116,36 +302,61 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: linear-gradient(135deg, rgba(255, 215, 0, 0.2) 0%, transparent 100%);
+            background: linear-gradient(135deg, rgba(244, 175, 77, 0.2) 0%, transparent 100%);
             opacity: 0;
-            transition: opacity 0.3s ease;
+            transition: opacity 0.4s ease;
+        }
+
+        .app-card::after {
+            content: '';
+            position: absolute;
+            inset: 2px;
+            border: 1px solid rgba(244, 175, 77, 0);
+            border-radius: 23px;
+            transition: border-color 0.4s ease;
+            pointer-events: none;
         }
 
         .app-card:hover {
-            background: rgba(255, 215, 0, 0.15);
-            transform: translateY(-5px) scale(1.05);
-            box-shadow: 0 8px 25px rgba(255, 215, 0, 0.3);
-            border-color: #ffe566;
+            background: linear-gradient(135deg, rgba(244, 175, 77, 0.15) 0%, rgba(255, 215, 0, 0.08) 100%);
+            transform: translateY(-12px);
+            box-shadow: 0 16px 40px rgba(244, 175, 77, 0.35),
+                        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            border-color: #FFD700;
         }
 
         .app-card:hover::before {
             opacity: 1;
         }
 
+        .app-card:hover::after {
+            border-color: rgba(244, 175, 77, 0.3);
+        }
+
         .app-icon {
-            font-size: 2.5rem;
-            margin-bottom: 0.8rem;
+            font-size: 3rem;
+            margin-bottom: 1rem;
             display: block;
+            animation: fadeUp 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+            transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .app-card:hover .app-icon {
+            transform: scale(1.15) rotateZ(5deg);
         }
 
         .app-name {
             font-family: 'Tajawal', sans-serif;
             font-weight: 700;
-            font-size: 0.95rem;
-            color: #ffe566;
+            font-size: 1.05rem;
+            background: linear-gradient(135deg, #F4AF4D 0%, #FFD700 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
             word-break: break-word;
             position: relative;
             z-index: 1;
+            line-height: 1.5;
         }
 
         .app-frame {
@@ -160,24 +371,39 @@
             animation: fadeUp 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
 
-        .ornament {
+        .home-btn {
+            background: linear-gradient(135deg, #F4AF4D 0%, #FFD700 50%, #FFAA00 100%);
+            border: 2px solid #FFE566;
+            padding: 0.8rem 1.8rem;
+            border-radius: 30px;
+            color: #0d1a6e;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            box-shadow: 0 8px 25px rgba(244, 175, 77, 0.5),
+                        inset 0 -2px 4px rgba(0, 0, 0, 0.2);
+            display: none;
             position: fixed;
-            font-size: 4rem;
-            opacity: 0.15;
-            z-index: 1;
-            pointer-events: none;
+            top: 1.5rem;
+            right: 1.5rem;
+            z-index: 100;
+            font-family: 'Tajawal', sans-serif;
         }
 
-        .ornament-tl {
-            top: 10px;
-            right: 10px;
-            animation: float 6s ease-in-out infinite;
+        .home-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(244, 175, 77, 0.6),
+                        inset 0 -2px 4px rgba(0, 0, 0, 0.2);
         }
 
-        .ornament-br {
-            bottom: 10px;
-            left: 10px;
-            animation: float 6s ease-in-out infinite reverse;
+        .home-btn:active {
+            transform: scale(0.97);
+        }
+
+        .home-btn.show {
+            display: block;
+            animation: fadeUp 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
 
         @keyframes fadeUp {
@@ -191,37 +417,69 @@
             }
         }
 
-        @keyframes float {
-            0%, 100% {
-                transform: translateY(0px);
+        @media (max-width: 800px) {
+            .header-title {
+                font-size: 2.5rem;
             }
-            50% {
-                transform: translateY(-10px);
+
+            .bismillah {
+                font-size: 1.1rem;
+            }
+
+            .subtitle {
+                font-size: 0.95rem;
+            }
+
+            .menu {
+                grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+                gap: 1rem;
+                max-width: 100%;
+            }
+
+            .app-card {
+                padding: 1.5rem 1rem;
+            }
+
+            .app-icon {
+                font-size: 2.5rem;
+                margin-bottom: 0.8rem;
+            }
+
+            .app-name {
+                font-size: 0.95rem;
+            }
+
+            .home-btn {
+                padding: 0.7rem 1.5rem;
+                font-size: 0.9rem;
+                top: 1rem;
+                right: 1rem;
             }
         }
 
         @media (max-width: 600px) {
             .header {
-                padding: 1rem 0.8rem;
+                padding: 1.5rem 0.8rem 1rem;
             }
 
             .header-title {
-                font-size: 1.4rem;
+                font-size: 2rem;
+                letter-spacing: 1px;
             }
 
-            .home-btn {
-                padding: 0.5rem 1rem;
-                font-size: 0.85rem;
+            .decoration-line {
+                width: 40px;
             }
 
             .menu {
-                grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+                grid-template-columns: repeat(2, 1fr);
                 gap: 0.8rem;
-                padding: 0.8rem;
+                padding: 0;
             }
 
             .app-card {
-                padding: 1rem;
+                padding: 1.2rem 0.8rem;
+                border-radius: 18px;
             }
 
             .app-icon {
@@ -240,34 +498,52 @@
         }
 
         .menu::-webkit-scrollbar-track {
-            background: rgba(255, 215, 0, 0.1);
+            background: rgba(244, 175, 77, 0.08);
             border-radius: 10px;
         }
 
         .menu::-webkit-scrollbar-thumb {
-            background: rgba(255, 215, 0, 0.4);
+            background: linear-gradient(180deg, #F4AF4D 0%, #FFD700 100%);
             border-radius: 10px;
+            box-shadow: 0 0 8px rgba(244, 175, 77, 0.4);
         }
 
         .menu::-webkit-scrollbar-thumb:hover {
-            background: rgba(255, 215, 0, 0.6);
+            background: linear-gradient(180deg, #FFD700 0%, #FFAA00 100%);
         }
     </style>
 </head>
 <body>
-    <div class="ornament ornament-tl">✦</div>
-    <div class="ornament ornament-br">✦</div>
+    <div class="ornament-corner ornament-tl">✦</div>
+    <div class="ornament-corner ornament-br">✦</div>
 
     <div class="app-container">
-        <div class="header">
-            <div class="header-title">كيدة</div>
-            <button class="home-btn" id="homeBtn">العودة للقائمة</button>
+        <div class="shimmer-top"></div>
+
+        <div class="header" id="header">
+            <div class="bismillah">بسم الله الرحمن الرحيم</div>
+            
+            <div class="quran-verse">
+                <div class="verse-arabic">إن هذا القرآن يهدي للتي هي أقوم</div>
+                <div class="verse-reference">سورة الإسراء - الآية 9</div>
+            </div>
+
+            <div class="header-decoration">
+                <div class="decoration-line"></div>
+                <div class="decoration-dot"></div>
+                <div class="decoration-line"></div>
+            </div>
+            <div class="header-title">قيادة</div>
+            <div class="subtitle">نظام التطبيقات المتكاملة</div>
         </div>
 
         <div class="content">
             <div class="menu" id="menu"></div>
             <iframe id="appFrame" class="app-frame"></iframe>
         </div>
+
+        <button class="home-btn" id="homeBtn">← العودة</button>
+        <div class="shimmer-bottom"></div>
     </div>
 
     <script>
@@ -284,15 +560,13 @@
             { name: 'التغذية', url: 'https://maydati.kieda.online', icon: '🍎' },
             { name: 'الترجمة', url: 'https://traducteur.kieda.online', icon: '🌐' },
             { name: 'النظارة', url: 'https://nadharatioptic.kieda.online', icon: '👓' },
-            { name: 'النوارتي', url: 'https://nawarati.kieda.online', icon: '💪' },
             { name: 'إسطنبول', url: 'https://istanbulharissaedition.kieda.online', icon: '🕌' },
             { name: 'الذكاء الاصطناعي', url: 'https://IA.kieda.online', icon: '🤖' },
             { name: 'IAE', url: 'https://IAE.kieda.online', icon: '⚙️' },
             { name: 'طبيب الأسنان', url: 'https://dentiste.kieda.online', icon: '🦷' },
             { name: 'الجمياتي', url: 'https://JAMIIATI.kieda.online', icon: '👥' },
             { name: 'الضروري', url: 'https://essential.kieda.online', icon: '⚡' },
-            { name: 'الجزار', url: 'https://jazzar.kieda.online', icon: '🥩' },
-            { name: 'طبيب الألم', url: 'https://tabibialam.kieda.online', icon: '🏥' },
+            { name: 'Médecin Généraliste', url: 'https://tabibialam.kieda.online', icon: '🏥' },
             { name: 'الطوارئ', url: 'https://urgence-test.kieda.online', icon: '🚑' },
             { name: 'الدابي', url: 'https://dabi.kieda.online', icon: '🏧' },
             { name: 'الصيدلية', url: 'https://saydaliati.kieda.online', icon: '💊' },
@@ -303,10 +577,12 @@
         const menu = document.getElementById('menu');
         const appFrame = document.getElementById('appFrame');
         const homeBtn = document.getElementById('homeBtn');
+        const header = document.getElementById('header');
 
-        apps.forEach(app => {
+        apps.forEach((app, i) => {
             const card = document.createElement('div');
             card.className = 'app-card';
+            card.style.animation = `fadeUp 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) ${0.5 + i * 0.06}s backwards`;
             card.innerHTML = `
                 <span class="app-icon">${app.icon}</span>
                 <div class="app-name">${app.name}</div>
@@ -315,6 +591,7 @@
                 appFrame.src = app.url;
                 appFrame.classList.add('active');
                 menu.classList.add('hidden');
+                header.style.display = 'none';
                 homeBtn.classList.add('show');
             });
             menu.appendChild(card);
@@ -324,6 +601,7 @@
             appFrame.src = '';
             appFrame.classList.remove('active');
             menu.classList.remove('hidden');
+            header.style.display = 'block';
             homeBtn.classList.remove('show');
         });
     </script>
